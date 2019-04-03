@@ -1,0 +1,10 @@
+%h1 Chat
+.chat
+  .messages
+    .message
+      %span.user User:
+      Let's chat!
+  %form
+    %label{:for => "message"} Message:
+    %input#message{:placeholder => "Enter your message...", :type => "text"}
+    %button{:type => "submit"} Send
