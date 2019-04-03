@@ -3,10 +3,13 @@ class Chat {
     this.channel = null;
     this.client = null;
     this.identity = null;
+    this.messages = ["Connecting..."];
     this.initialize();
   }
 
   initialize() {
+    this.renderMessages();
+
     Rails.ajax({
       url: "/tokens",
       type: "POST",
@@ -33,6 +36,7 @@ class Chat {
   setupChannel(channel) {
     this.channel = channel;
     this.joinChannel();
+    this.addMessage({ body: `Joined general channel as ${this.identity}` });
   }
 
   setupClient(client) {
@@ -45,5 +49,25 @@ class Chat {
           friendlyName: "General Chat Channel"
         }).then((channel) => this.setupChannel(channel));
       });
+  }
+
+  addMessage(message) {
+    let html = "";
+
+    if (message.author) {
+      const className = message.author == this.identity ? "user me" : "user";
+      html += `<span class="${className}">${message.author}: </span>`;
+    }
+
+    html += message.body;
+    this.messages.push(html);
+    this.renderMessages();
+  }
+
+  renderMessages() {
+    let messageContainer = document.querySelector(".chat .messages");
+    messageContainer.innerHTML = this.messages
+      .map(message => `<div class="message">${message}</div>`)
+      .join("");
   }
 };
