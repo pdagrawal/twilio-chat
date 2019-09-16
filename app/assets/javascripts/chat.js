@@ -36,21 +36,16 @@ class Chat {
   setupChannel(channel) {
     this.channel = channel;
     this.joinChannel();
-    this.addMessage({ body: `Joined general channel as ${this.identity}` });
+    this.addMessage({ body: `Joined ${channel.friendlyName} channel as ${this.identity}` });
     this.channel.on("messageAdded", message => this.addMessage(message));
     this.setupForm();
   }
 
   setupClient(client) {
     this.client = client;
-    this.client.getChannelByUniqueName("general")
-      .then((channel) => this.setupChannel(channel))
-      .catch((error) => {
-        this.client.createChannel({
-          uniqueName: "general",
-          friendlyName: "General Chat Channel"
-        }).then((channel) => this.setupChannel(channel));
-      });
+    const channel_sid = document.getElementById('channel_sid').value;
+    this.client.getChannelBySid(channel_sid)
+      .then((channel) => this.setupChannel(channel));
   }
 
   addMessage(message) {

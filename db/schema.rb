@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_03_074320) do
+ActiveRecord::Schema.define(version: 2019_09_16_094548) do
+
+  create_table "chat_rooms", force: :cascade do |t|
+    t.string "friendly_name"
+    t.string "twilio_sid"
+    t.integer "owner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false

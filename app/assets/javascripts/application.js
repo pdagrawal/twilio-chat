@@ -13,10 +13,16 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require jquery
+//= require jquery_ujs
 //= require_tree .
 
-document.addEventListener("DOMContentLoaded", () => {
+$( document ).on('turbolinks:load', function() {
   if (document.querySelector(".chat")) {
     window.chat = new Chat();
+  }
+
+  if (document.querySelector(".rooms")) {
+    window.rooms = new Room();
   }
 });

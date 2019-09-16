@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  friendly_name: MyString
+  twilio_sid: MyString
+  owner_id: 1
+
+two:
+  friendly_name: MyString
+  twilio_sid: MyString
+  owner_id: 1

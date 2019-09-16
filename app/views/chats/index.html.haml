@@ -1,0 +1,9 @@
+.rooms
+  %h1 Chat Rooms
+  - @rooms.each do |room|
+    = link_to room.friendly_name, chat_path(room)
+
+  %form.add_room
+    %label{:for => "room"} Create Room:
+    %input#room_name{:placeholder => "Enter Room name...", :type => "text"}
+    %button{:type => "submit"} Send

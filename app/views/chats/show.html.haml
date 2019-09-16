@@ -4,6 +4,7 @@
     .message
       %span.user User:
       Let's chat!
+  %input#channel_sid{value: "#{@room.twilio_sid}", style: 'display: none;'}
   %form
     %label{:for => "message"} Message:
     %input#message{:placeholder => "Enter your message...", :type => "text"}
